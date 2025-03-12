@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamilton Walkability & Bikeability Scores</title>
+    <!-- Core Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f4f8; /* Soft light gray-blue */
+            color: #2d3748;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { padding: 40px; background: rgba(255, 255, 255, 0.9); border-radius: 15px; margin-bottom: 20px; }
+        h1 { font-size: 40px; color: #0984e3; text-align: center; text-shadow: 0 0 5px rgba(9, 132, 227, 0.3); }
+        h2 { font-size: 28px; color: #e17055; text-align: center; }
+        p, li { font-size: 16px; line-height: 1.6; }
+        .chart-container { width: 400px; margin: 20px auto; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #dfe6e9; }
+        th { background: #74b9ff; color: white; }
+        .example { background: #e6f3fa; padding: 15px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <div class="section" data-aos="fade-up">
+            <h1>Walkability & Bikeability Scores</h1>
+            <h2>The Formulas</h2>
+            <p id="formula-text" style="text-align: center;">
+                Walkability Score = 100 × Σ (Normalized Indicator × Weight)<br>
+                Bikeability Score = 100 × Σ (Normalized Indicator × Weight)
+            </p>
+            <div id="explanation-text" style="text-align: left; max-width: 800px; margin: 20px auto;"></div>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2>Walkability Indicators & Weights</h2>
+            <div class="chart-container"><div id="walkChart"></div></div>
+            <table>
+                <tr><th>Indicator</th><th>Weight</th><th>Why It Matters</th></tr>
+                <tr><td>Sidewalk Length</td><td>15%</td><td>More sidewalks = easier walking</td></tr>
+                <tr><td>Pedestrian Path Length</td><td>15%</td><td>Extra paths boost accessibility</td></tr>
+                <tr><td>Amenity Count</td><td>15%</td><td>Nearby destinations encourage walking</td></tr>
+                <tr><td>Street Light Count</td><td>10%</td><td>Lights make it safer at night</td></tr>
+                <tr><td>Bus Stop Count</td><td>10%</td><td>Transit access supports walkers</td></tr>
+                <tr><td>Amenity Variety</td><td>10%</td><td>Diverse options increase appeal</td></tr>
+                <tr><td>Intersection Density</td><td>10%</td><td>More crossings = better connectivity</td></tr>
+                <tr><td>Safety (Collisions)</td><td>10%</td><td>Fewer crashes = safer walking</td></tr>
+                <tr><td>Street Density</td><td>5%</td><td>More streets can aid navigation</td></tr>
+            </table>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2>Bikeability Indicators & Weights</h2>
+            <div class="chart-container"><div id="bikeChart"></div></div>
+            <table>
+                <tr><th>Indicator</th><th>Weight</th><th>Why It Matters</th></tr>
+                <tr><td>Bike Lane Length</td><td>25%</td><td>Dedicated lanes are critical for biking</td></tr>
+                <tr><td>Bikeway Length</td><td>20%</td><td>Extra paths enhance bike routes</td></tr>
+                <tr><td>Bike Parking Count</td><td>15%</td><td>Secure parking encourages biking</td></tr>
+                <tr><td>Bike-Friendly Roads</td><td>15%</td><td>Safe roads matter for cyclists</td></tr>
+                <tr><td>Bike Safety (Collisions)</td><td>15%</td><td>Fewer bike crashes = safer riding</td></tr>
+                <tr><td>Bike Share Hubs</td><td>10%</td><td>Access to bikes boosts usage</td></tr>
+            </table>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2>How It Works (In Simple Terms)</h2>
+            <ol style="text-align: left; max-width: 800px; margin: 20px auto;">
+                <li><strong>Normalize:</strong> Compare each factor to the city’s best (e.g., 200m of sidewalk out of 1000m max = 0.2).</li>
+                <li><strong>Safety Twist:</strong> For collisions, safer = higher score (e.g., 10 collisions out of 50 max = 1 - 0.2 = 0.8).</li>
+                <li><strong>Weight It:</strong> Multiply by importance (e.g., 0.2 × 15% = 0.03 for sidewalks).</li>
+                <li><strong>Add Up:</strong> Sum all weighted pieces (e.g., 0.03 + 0.05 + …).</li>
+                <li><strong>Scale:</strong> Multiply by 100 (e.g., 0.65 × 100 = 65).</li>
+            </ol>
+            <p><strong>Why This Formula?</strong></p>
+            <ul style="text-align: left; max-width: 800px; margin: 20px auto;">
+                <li><strong>Fair Comparison:</strong> Normalization puts everything on the same 0-1 scale.</li>
+                <li><strong>Prioritization:</strong> Weights reflect what matters most.</li>
+                <li><strong>Clear Scores:</strong> 0-100 is intuitive—100 is perfect, 0 needs work.</li>
+                <li><strong>Safety Focus:</strong> Subtracting collisions boosts safer areas.</li>
+            </ul>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2>Examples with Real Scores</h2>
+            <div class="example">
+                <h3>Ward 1: Walkability Score</h3>
+                <p>
+                    • Sidewalk Length: 200m (max 1000m) → 0.2 × 0.15 = 0.03<br>
+                    • Street Lights: 5 (max 20) → 0.25 × 0.1 = 0.025<br>
+                    • Bus Stops: 2 (max 5) → 0.4 × 0.1 = 0.04<br>
+                    • Safety: 10 collisions (max 50) → 1 - 0.2 = 0.8 × 0.1 = 0.08<br>
+                    • (Others approximated: 0.098 from remaining factors)<br>
+                    • Total: 0.03 + 0.025 + 0.04 + 0.08 + 0.098 = 0.273<br>
+                    • <strong>Score: 0.273 × 100 = 22.83</strong><br>
+                    <em>Meaning: Moderate walkability; needs more infrastructure.</em>
+                </p>
+            </div>
+            <div class="example">
+                <h3>Ward 2: Bikeability Score</h3>
+                <p>
+                    • Bike Lane Length: 300m (max 1000m) → 0.3 × 0.25 = 0.075<br>
+                    • Bikeway Length: 150m (max 800m) → 0.1875 × 0.2 = 0.0375<br>
+                    • Bike Parking: 10 (max 30) → 0.333 × 0.15 = 0.05<br>
+                    • Safety: 5 collisions (max 20) → 1 - 0.25 = 0.75 × 0.15 = 0.1125<br>
+                    • (Others approximated: 0.051 from remaining factors)<br>
+                    • Total: 0.075 + 0.0375 + 0.05 + 0.1125 + 0.051 = 0.326<br>
+                    • <strong>Score: 0.326 × 100 = 22.57</strong><br>
+                    <em>Meaning: Strong bikeability; safety and lanes stand out.</em>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. TsParticles Background
+        tsParticles.load('particles-js', {
+            particles: {
+                number: { value: 50 },
+                color: { value: '#74b9ff' },
+                shape: { type: 'circle' },
+                move: { speed: 2, direction: 'top' }
+            },
+            interactivity: { events: { onhover: { enable: true, mode: 'bubble' } } }
+        });
+
+        // 2. Typed.js for Formula Animation
+        const typed = new Typed('#explanation-text', {
+            strings: ["What’s Happening?<br>We measure different factors (like sidewalks or bike lanes), scale them from 0 to 1, multiply each by how important it is (its 'weight'), add them up, and scale to 100 for an easy-to-read score."],
+            typeSpeed: 20,
+            showCursor: false,
+            onComplete: () => gsap.to('#explanation-text', { opacity: 1, duration: 1 })
+        });
+        gsap.from('#formula-text', { opacity: 0, y: 50, duration: 1.5, ease: 'power2.out' });
+
+        // 3. ApexCharts for Walkability Radar
+        const walkOptions = {
+            chart: { type: 'radar', height: 350 },
+            series: [{ name: 'Weight', data: [15, 15, 15, 10, 10, 10, 10, 10, 5] }],
+            labels: ['Sidewalks', 'Paths', 'Amenities', 'Lights', 'Bus Stops', 'Variety', 'Intersections', 'Safety', 'Streets'],
+            colors: ['#0984e3'],
+            stroke: { width: 2 },
+            yaxis: {
+                min: 0,
+                max: 15,
+                tickAmount: 3, // This creates 4 ticks (0, 5, 10, 15)
+                labels: {
+                    formatter: function(val) {
+                        return Math.round(val); // Ensures clean numbers
+                    }
+                }
+            },
+            xaxis: {
+                labels: {
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold'
+                    }
+                }
+            }
+        };
+        const walkChart = new ApexCharts(document.querySelector('#walkChart'), walkOptions);
+        walkChart.render();
+        anime({ targets: '#walkChart', scale: [0, 1], duration: 1500, easing: 'easeOutElastic' });
+
+        // 4. ApexCharts for Bikeability Radar
+        const bikeOptions = {
+            chart: { type: 'radar', height: 350 },
+            series: [{ name: 'Weight', data: [25, 20, 15, 15, 15, 10] }],
+            labels: ['Bike Lanes', 'Bikeways', 'Parking', 'Roads', 'Safety', 'Bike Share'],
+            colors: ['#e17055'],
+            stroke: { width: 2 },
+            yaxis: { min: 0, max: 25 },
+            xaxis: {
+                labels: {
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold'
+                    }
+                }
+            }
+        };
+        const bikeChart = new ApexCharts(document.querySelector('#bikeChart'), bikeOptions);
+        bikeChart.render();
+        anime({ targets: '#bikeChart', scale: [0, 1], duration: 1500, easing: 'easeOutElastic' });
+
+        // 5. AOS for Scroll Animations
+        AOS.init({ duration: 1000 });
+
+        // 6. Confetti.js on Load
+        const confetti = new ConfettiGenerator({ target: 'particles-js', colors: ['#74b9ff', '#e17055', '#0984e3'], max: 50 });
+        confetti.render();
+        setTimeout(() => confetti.clear(), 3000);
+    </script>
+</body>
+</html>
