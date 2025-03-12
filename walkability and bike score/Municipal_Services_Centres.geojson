@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "Municipal_Services_Centres",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "OBJECTID": 1, "NAME": "Hamilton City Hall", "ADDRESS": "71 Main Street West", "COMMUNITY": "Hamilton" }, "geometry": { "type": "Point", "coordinates": [ -79.873006241214, 43.255553663410403 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 2, "NAME": "Ancaster", "ADDRESS": "300 Wilson Street East", "COMMUNITY": "Ancaster" }, "geometry": { "type": "Point", "coordinates": [ -79.976709828742798, 43.225227679279897 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 3, "NAME": "Dundas", "ADDRESS": "60 Main Street", "COMMUNITY": "Dundas" }, "geometry": { "type": "Point", "coordinates": [ -79.952725868200602, 43.263825545188197 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 4, "NAME": "Flamborough", "ADDRESS": "163 Dundas Street East", "COMMUNITY": "Flamborough" }, "geometry": { "type": "Point", "coordinates": [ -79.904905089201193, 43.3237420696409 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 5, "NAME": "Glanbrook", "ADDRESS": "4280 Binbrook Road", "COMMUNITY": "Glanbrook" }, "geometry": { "type": "Point", "coordinates": [ -79.8375039420268, 43.129145011125502 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 6, "NAME": "Stoney Creek", "ADDRESS": "777 Highway No. 8", "COMMUNITY": "Stoney Creek" }, "geometry": { "type": "Point", "coordinates": [ -79.691441838813503, 43.212863331994399 ] } }
+]
+}

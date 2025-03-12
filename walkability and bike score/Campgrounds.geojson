@@ -1,0 +1,19 @@
+{
+"type": "FeatureCollection",
+"name": "Campgrounds",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "OBJECTID": 1, "NAME": "John Bayus Park", "ADDRESS": "1429 Sheffield Road", "COMMUNITY": "Flamborough", "URL": "https://www.johnbayuspark.ca/" }, "geometry": { "type": "Point", "coordinates": [ -80.2128110628976, 43.335956784442899 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 2, "NAME": "Flamboro Valley Camping Resort", "ADDRESS": "1158 Regional Road No. 97", "COMMUNITY": "Flamborough", "URL": "https://www.flamborovalley.com/" }, "geometry": { "type": "Point", "coordinates": [ -80.0776488050426, 43.388488592317799 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 3, "NAME": "Emerald Lake Trailer Resort and Waterpark", "ADDRESS": "7248 Gore Road", "COMMUNITY": "Puslinch", "URL": "https://emeraldlake.ca/" }, "geometry": { "type": "Point", "coordinates": [ -80.129322208875195, 43.410625342107998 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 4, "NAME": "Fifty Point Conservation Area and Campground", "ADDRESS": "1479 Baseline Road", "COMMUNITY": "Winona", "URL": "https://conservationhamilton.ca/conservation-areas/fifty-point-conservation-area/" }, "geometry": { "type": "Point", "coordinates": [ -79.626416000630201, 43.220050483154502 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 5, "NAME": "Gulliver's Lake Campground - Sun Retreats Flamborough", "ADDRESS": "792 Safari Road", "COMMUNITY": "Millgrove", "URL": "https://www.sunrvresorts.com/resorts/true-north/ontario/gullivers-lake/" }, "geometry": { "type": "Point", "coordinates": [ -80.022408310868897, 43.356427971738498 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 6, "NAME": "Maple Grove RV Resort", "ADDRESS": "1488 Gore Road", "COMMUNITY": "Puslinch", "URL": "https://maplegrovervresort.ca/" }, "geometry": { "type": "Point", "coordinates": [ -80.125757929566802, 43.4092442482929 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 7, "NAME": "Lawson Park", "ADDRESS": "322 Concession 11 East", "COMMUNITY": "Freelton", "URL": "https://www.lawsonpark.ca" }, "geometry": { "type": "Point", "coordinates": [ -80.002283063488406, 43.417811123987001 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 8, "NAME": "Olympia Village Campground & RV Park", "ADDRESS": "1161 Concession 4 West", "COMMUNITY": "Flamborough", "URL": "https://www.olympiavillage.ca/" }, "geometry": { "type": "Point", "coordinates": [ -80.050925392326604, 43.305838975297704 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 9, "NAME": "Pine Valley Park Campground Resort", "ADDRESS": "955 Valens Road", "COMMUNITY": "Branchton", "URL": "https://www.pinevalleypark.com/" }, "geometry": { "type": "Point", "coordinates": [ -80.113788458787198, 43.318278951530203 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 10, "NAME": "Valens Conservation Area and Campground", "ADDRESS": "1691 Regional Road No. 97", "COMMUNITY": "Flamborough", "URL": "https://conservationhamilton.ca/conservation-areas/valens-lake/" }, "geometry": { "type": "Point", "coordinates": [ -80.140195980767203, 43.383185075957101 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 11, "NAME": "Ponderosa Nature Resort", "ADDRESS": "1218 Concession 8 West", "COMMUNITY": "Flamborough", "URL": "https://ponderosaresort.ca/" }, "geometry": { "type": "Point", "coordinates": [ -80.078041595543894, 43.369848820254298 ] } },
+{ "type": "Feature", "properties": { "OBJECTID": 12, "NAME": "Fernbrook Resort", "ADDRESS": "57 Concession 12 East", "COMMUNITY": "Flamborough", "URL": "http://www.fernbrookresort.com/" }, "geometry": { "type": "Point", "coordinates": [ -80.043230642619406, 43.412406740709102 ] } }
+]
+}
